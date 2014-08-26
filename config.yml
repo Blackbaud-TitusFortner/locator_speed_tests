@@ -1,0 +1,2 @@
+:webdriver => chrome
+:headless => false
