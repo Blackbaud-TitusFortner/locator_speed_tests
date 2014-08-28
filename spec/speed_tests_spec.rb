@@ -14,467 +14,2214 @@ describe SpeedTests do
     @array = []
   end
 
-  context "Watir" do
-    let(:b) { Watir::Browser.new }
-
+  context "Firefox" do
     before(:all) do
-      puts 'Watir'
+      puts "Firefox Browser"
     end
 
-    before(:each) do
-      b.goto TEST_ELEMENTS_URL
-    end
+    context "Watir " do
+      let(:b) { Watir::Browser.new }
 
-    after(:each) do
-      b.quit
-    end
-
-    it 'finds element by ID' do
-      15.times do
-        start_time = Time.now
-        (1..15).each do |i|
-          b.a(id: "text_#{i}").text.should == "Text #{i}"
-        end
-        @array << Time.now - start_time
+      before(:all) do
+        puts 'Watir'
       end
-      puts "#{RSpec.current_example.description} - #{result(@array)}"
+
+      before(:each) do
+        b.goto TEST_ELEMENTS_URL
+      end
+
+      after(:each) do
+        b.quit
+      end
+
+      it 'finds element by ID' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(id: "text_#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by CSS ID' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(css: "#text_#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by class' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(class: "text-#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by CSS class' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(css: ".text-#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by Text' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(text: "Text #{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by attribute only' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(css: "[data-text-#{i}]").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by attribute value' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(css: "[data-text='text#{i}']").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by Name' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(name: "text#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by XPath' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(xpath: "//a[@data-text='text#{i}']").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
     end
 
-    it 'finds element by CSS ID' do
-      15.times do
-        start_time = Time.now
-        (1..15).each do |i|
-          b.a(css: "#text_#{i}").text.should == "Text #{i}"
-        end
-        @array << Time.now - start_time
+    context "Watir with generic element" do
+      let(:b) { Watir::Browser.new }
+
+      before(:all) do
+        puts 'Watir with generic element'
       end
-      puts "#{RSpec.current_example.description} - #{result(@array)}"
+
+      before(:each) do
+        b.goto TEST_ELEMENTS_URL
+      end
+
+      after(:each) do
+        b.quit
+      end
+
+      it 'finds element by ID' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.element(id: "text_#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by CSS ID' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.element(css: "#text_#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by class' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.element(class: "text-#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by CSS class' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.element(css: ".text-#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by Text' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.element(text: "Text #{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by attribute only' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.element(css: "[data-text-#{i}]").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by attribute value' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.element(css: "[data-text='text#{i}']").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by Name' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.element(name: "text#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by XPath' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.element(xpath: "//a[@data-text='text#{i}']").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
     end
 
-    it 'finds element by class' do
-      15.times do
-        start_time = Time.now
-        (1..15).each do |i|
-          b.a(class: "text-#{i}").text.should == "Text #{i}"
-        end
-        @array << Time.now - start_time
+    context "Watir with CSS" do
+      let(:b) { Watir::Browser.new }
+
+      before(:all) do
+        Watir.prefer_css = true
+        puts 'Watir with CSS'
       end
-      puts "#{RSpec.current_example.description} - #{result(@array)}"
+
+      after(:all) do
+        Watir.prefer_css = false
+      end
+
+      before(:each) do
+        b.goto TEST_ELEMENTS_URL
+      end
+
+      after(:each) do
+        b.quit
+      end
+
+      it 'finds element by class' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(class: "text-#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by Text' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(text: "Text #{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by Name' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(name: "text#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
     end
 
-    it 'finds element by CSS class' do
-      15.times do
-        start_time = Time.now
-        (1..15).each do |i|
-          b.a(css: ".text-#{i}").text.should == "Text #{i}"
-        end
-        @array << Time.now - start_time
+    context "Watirmark" do
+
+      before(:all) do
+        puts 'Watirmark'
       end
-      puts "#{RSpec.current_example.description} - #{result(@array)}"
+
+      let(:b) { @session.openbrowser }
+
+      before(:each) do
+        @session = Watirmark::Session.instance
+        b.goto TEST_ELEMENTS_URL
+      end
+
+      after(:each) do
+        @session.closebrowser
+      end
+
+      it 'finds element by ID' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(id: "text_#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by CSS ID' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(css: "#text_#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by class' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(class: "text-#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by CSS class' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(css: ".text-#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by Text' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(text: "Text #{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by attribute only' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(css: "[data-text-#{i}]").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by attribute value' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(css: "[data-text='text#{i}']").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by Name' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(name: "text#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by XPath' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(xpath: "//a[@data-text='text#{i}']").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
     end
 
-    it 'finds element by Text' do
-      15.times do
-        start_time = Time.now
-        (1..15).each do |i|
-          b.a(text: "Text #{i}").text.should == "Text #{i}"
-        end
-        @array << Time.now - start_time
+    context "Watirmark with Regex" do
+
+      before(:all) do
+        puts 'Watirmark with Regex'
       end
-      puts "#{RSpec.current_example.description} - #{result(@array)}"
+
+      let(:b) { @session.openbrowser }
+
+      before(:each) do
+        @session = Watirmark::Session.instance
+        b.goto TEST_ELEMENTS_URL
+      end
+
+      after(:each) do
+        @session.closebrowser
+      end
+
+      it 'finds element by ID' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(id: /xt_#{i}/).text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by class' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(class: /xt-#{i}/).text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by Text' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(text: /xt #{i}/).text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by Name' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(name: /xt#{i}/).text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
     end
 
-    it 'finds element by attribute only' do
-      15.times do
-        start_time = Time.now
-        (1..15).each do |i|
-          b.a(css: "[data-text-#{i}]").text.should == "Text #{i}"
-        end
-        @array << Time.now - start_time
+    context "Watirmark with generic element" do
+
+      before(:all) do
+        puts 'Watirmark with generic element'
       end
-      puts "#{RSpec.current_example.description} - #{result(@array)}"
+
+      let(:b) { @session.openbrowser }
+
+      before(:each) do
+        @session = Watirmark::Session.instance
+        b.goto TEST_ELEMENTS_URL
+      end
+
+      after(:each) do
+        @session.closebrowser
+      end
+
+      it 'finds element by ID' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.element(id: "text_#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by CSS ID' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.element(css: "#text_#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by class' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.element(class: "text-#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by CSS class' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.element(css: ".text-#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by Text' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.element(text: "Text #{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by attribute only' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.element(css: "[data-text-#{i}]").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by attribute value' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.element(css: "[data-text='text#{i}']").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by Name' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.element(name: "text#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by XPath' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.element(xpath: "//a[@data-text='text#{i}']").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
     end
 
-    it 'finds element by attribute value' do
-      15.times do
-        start_time = Time.now
-        (1..15).each do |i|
-          b.a(css: "[data-text='text#{i}']").text.should == "Text #{i}"
-        end
-        @array << Time.now - start_time
+    context "Watirmark with CSS" do
+
+      before(:all) do
+        puts 'Watirmark with CSS'
+        Watir.prefer_css = true
       end
-      puts "#{RSpec.current_example.description} - #{result(@array)}"
+
+      after(:all) do
+        Watir.prefer_css = false
+      end
+
+      let(:b) { @session.openbrowser }
+
+      before(:each) do
+        @session = Watirmark::Session.instance
+        b.goto TEST_ELEMENTS_URL
+      end
+
+      after(:each) do
+        @session.closebrowser
+      end
+
+      it 'finds element by class' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(class: "text-#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by Text' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(text: "Text #{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by Name' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(name: "text#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
     end
 
-    it 'finds element by Name' do
-      15.times do
-        start_time = Time.now
-        (1..15).each do |i|
-          b.a(name: "text#{i}").text.should == "Text #{i}"
-        end
-        @array << Time.now - start_time
+    context "Watirmark without Always Locate" do
+
+      before(:all) do
+        Watir.always_locate = false
+        puts 'Watirmark without Always Locate'
       end
-      puts "#{RSpec.current_example.description} - #{result(@array)}"
+
+      after(:all) do
+        Watir.always_locate = true
+      end
+
+      let(:b) { @session.openbrowser }
+
+      before(:each) do
+        @session = Watirmark::Session.instance
+        b.goto TEST_ELEMENTS_URL
+      end
+
+      after(:each) do
+        @session.closebrowser
+      end
+
+      it 'finds element by ID' do
+        15.times do
+          @elements = []
+          (1..15).each do |i|
+            @elements << b.a(id: "text_#{i}")
+          end
+          start_time = Time.now
+          (1..15).each do |i|
+            @elements[i-1].text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by CSS ID' do
+        15.times do
+          @elements = []
+          (1..15).each do |i|
+            @elements << b.a(css: "#text_#{i}")
+          end
+          start_time = Time.now
+          (1..15).each do |i|
+            @elements[i-1].text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by class' do
+        15.times do
+          @elements = []
+          (1..15).each do |i|
+            @elements << b.a(class: "text-#{i}")
+          end
+          start_time = Time.now
+          (1..15).each do |i|
+            @elements[i-1].text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by CSS class' do
+        15.times do
+          @elements = []
+          (1..15).each do |i|
+            @elements << b.a(class: "text-#{i}")
+          end
+          start_time = Time.now
+          (1..15).each do |i|
+            @elements[i-1].text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by Text' do
+        15.times do
+          @elements = []
+          (1..15).each do |i|
+            @elements << b.a(text: "Text #{i}")
+          end
+          start_time = Time.now
+          (1..15).each do |i|
+            @elements[i-1].text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by attribute only' do
+        15.times do
+          @elements = []
+          (1..15).each do |i|
+            @elements << b.a(css: "[data-text-#{i}]")
+          end
+          start_time = Time.now
+          (1..15).each do |i|
+            @elements[i-1].text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by attribute value' do
+        15.times do
+          @elements = []
+          (1..15).each do |i|
+            @elements << b.a(css: "[data-text='text#{i}']")
+          end
+          start_time = Time.now
+          (1..15).each do |i|
+            @elements[i-1].text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by Name' do
+        15.times do
+          @elements = []
+          (1..15).each do |i|
+            @elements << b.a(name: "text#{i}")
+          end
+          start_time = Time.now
+          (1..15).each do |i|
+            @elements[i-1].text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by XPath' do
+        15.times do
+          @elements = []
+          (1..15).each do |i|
+            @elements << b.a(xpath: "//a[@data-text='text#{i}']")
+          end
+          start_time = Time.now
+          (1..15).each do |i|
+            @elements[i-1].text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
     end
 
-    it 'finds element by XPath' do
-      15.times do
-        start_time = Time.now
-        (1..15).each do |i|
-          b.a(xpath: "//a[@data-text='text#{i}']").text.should == "Text #{i}"
-        end
-        @array << Time.now - start_time
+    context "Watirmark with generic element without Always Locate" do
+
+      before(:all) do
+        Watir.always_locate = false
+        puts 'Watirmark with generic element  without Always Locate'
       end
-      puts "#{RSpec.current_example.description} - #{result(@array)}"
+
+      after(:all) do
+        Watir.always_locate = true
+      end
+
+      let(:b) { @session.openbrowser }
+
+      before(:each) do
+        @session = Watirmark::Session.instance
+        b.goto TEST_ELEMENTS_URL
+      end
+
+      after(:each) do
+        @session.closebrowser
+      end
+
+      it 'finds element by ID' do
+        15.times do
+          @elements = []
+          (1..15).each do |i|
+            @elements << b.element(id: "text_#{i}")
+          end
+          start_time = Time.now
+          (1..15).each do |i|
+            @elements[i-1].text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by CSS ID' do
+        15.times do
+          @elements = []
+          (1..15).each do |i|
+            @elements << b.element(css: "#text_#{i}")
+          end
+          start_time = Time.now
+          (1..15).each do |i|
+            @elements[i-1].text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by class' do
+        15.times do
+          @elements = []
+          (1..15).each do |i|
+            @elements << b.element(class: "text-#{i}")
+          end
+          start_time = Time.now
+          (1..15).each do |i|
+            @elements[i-1].text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by CSS class' do
+        15.times do
+          @elements = []
+          (1..15).each do |i|
+            @elements << b.element(class: "text-#{i}")
+          end
+          start_time = Time.now
+          (1..15).each do |i|
+            @elements[i-1].text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by Text' do
+        15.times do
+          @elements = []
+          (1..15).each do |i|
+            @elements << b.element(text: "Text #{i}")
+          end
+          start_time = Time.now
+          (1..15).each do |i|
+            @elements[i-1].text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by attribute only' do
+        15.times do
+          @elements = []
+          (1..15).each do |i|
+            @elements << b.element(css: "[data-text-#{i}]")
+          end
+          start_time = Time.now
+          (1..15).each do |i|
+            @elements[i-1].text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by attribute value' do
+        15.times do
+          @elements = []
+          (1..15).each do |i|
+            @elements << b.element(css: "[data-text='text#{i}']")
+          end
+          start_time = Time.now
+          (1..15).each do |i|
+            @elements[i-1].text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by Name' do
+        15.times do
+          @elements = []
+          (1..15).each do |i|
+            @elements << b.element(name: "text#{i}")
+          end
+          start_time = Time.now
+          (1..15).each do |i|
+            @elements[i-1].text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by XPath' do
+        15.times do
+          @elements = []
+          (1..15).each do |i|
+            @elements << b.element(xpath: "//a[@data-text='text#{i}']")
+          end
+          start_time = Time.now
+          (1..15).each do |i|
+            @elements[i-1].text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+    end
+    
+    context "Webdriver" do
+      let(:b) { Selenium::WebDriver.for :firefox }
+
+      before(:all) do
+        puts 'Webdriver'
+      end
+
+      before(:each) do
+        b.get TEST_ELEMENTS_URL
+      end
+
+      after(:each) do
+        b.quit
+      end
+
+      it 'finds elements by ID' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.first(id: "text_#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds elements by CSS ID' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.first(css: "#text_#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds elements by class' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.first(class: "text-#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds elements by CSS class' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.first(css: ".text-#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds elements by Text' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.first(link: "Text #{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds elements by attribute only' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.first(css: "[data-text-#{i}]").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds elements by attribute value' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.first(css: "[data-text='text#{i}']").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by Name' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.first(name: "text#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by XPath' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.first(xpath: "//a[@data-text='text#{i}']").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
     end
 
   end
 
-  context "Watir with CSS" do
-    let(:b) { Watir::Browser.new }
-
+  context "Chrome" do
     before(:all) do
-      Watir.prefer_css = true
-      puts 'Watir with CSS'
+      puts "Chrome Browser"
     end
 
-    after(:all) do
-      Watir.prefer_css = false
-    end
+    context "Watir " do
+      let(:b) { Watir::Browser.new :chrome }
 
-    before(:each) do
-      b.goto TEST_ELEMENTS_URL
-    end
-
-    after(:each) do
-      b.quit
-    end
-
-    it 'finds element by class' do
-      15.times do
-        start_time = Time.now
-        (1..15).each do |i|
-          b.a(class: "text-#{i}").text.should == "Text #{i}"
-        end
-        @array << Time.now - start_time
+      before(:all) do
+        puts 'Watir'
       end
-      puts "#{RSpec.current_example.description} - #{result(@array)}"
-    end
 
-    it 'finds element by Text' do
-      15.times do
-        start_time = Time.now
-        (1..15).each do |i|
-          b.a(text: "Text #{i}").text.should == "Text #{i}"
-        end
-        @array << Time.now - start_time
+      before(:each) do
+        b.goto TEST_ELEMENTS_URL
       end
-      puts "#{RSpec.current_example.description} - #{result(@array)}"
-    end
 
-    it 'finds element by Name' do
-      15.times do
-        start_time = Time.now
-        (1..15).each do |i|
-          b.a(name: "text#{i}").text.should == "Text #{i}"
-        end
-        @array << Time.now - start_time
+      after(:each) do
+        b.quit
       end
-      puts "#{RSpec.current_example.description} - #{result(@array)}"
+
+      it 'finds element by ID' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(id: "text_#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by CSS ID' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(css: "#text_#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by class' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(class: "text-#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by CSS class' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(css: ".text-#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by Text' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(text: "Text #{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by attribute only' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(css: "[data-text-#{i}]").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by attribute value' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(css: "[data-text='text#{i}']").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by Name' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(name: "text#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by XPath' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(xpath: "//a[@data-text='text#{i}']").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
     end
 
+    context "Watir with generic element" do
+      let(:b) { Watir::Browser.new :chrome }
+
+      before(:all) do
+        puts 'Watir with generic element'
+      end
+
+      before(:each) do
+        b.goto TEST_ELEMENTS_URL
+      end
+
+      after(:each) do
+        b.quit
+      end
+
+      it 'finds element by ID' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.element(id: "text_#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by CSS ID' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.element(css: "#text_#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by class' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.element(class: "text-#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by CSS class' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.element(css: ".text-#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by Text' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.element(text: "Text #{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by attribute only' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.element(css: "[data-text-#{i}]").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by attribute value' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.element(css: "[data-text='text#{i}']").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by Name' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.element(name: "text#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by XPath' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.element(xpath: "//a[@data-text='text#{i}']").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+    end
+
+    context "Watir with CSS" do
+      let(:b) { Watir::Browser.new :chrome }
+
+      before(:all) do
+        Watir.prefer_css = true
+        puts 'Watir with CSS'
+      end
+
+      after(:all) do
+        Watir.prefer_css = false
+      end
+
+      before(:each) do
+        b.goto TEST_ELEMENTS_URL
+      end
+
+      after(:each) do
+        b.quit
+      end
+
+      it 'finds element by class' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(class: "text-#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by Text' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(text: "Text #{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by Name' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(name: "text#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+    end
+
+    context "Watirmark" do
+
+      before(:all) do
+        puts 'Watirmark'
+      end
+
+      let(:b) { @session.openbrowser }
+
+      before(:each) do
+        @config = Watirmark::Configuration.instance
+        @config.webdriver = 'chrome'
+        @session = Watirmark::Session.instance
+        b.goto TEST_ELEMENTS_URL
+      end
+
+      after(:each) do
+        @session.closebrowser
+        @config.reload
+      end
+
+      it 'finds element by ID' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(id: "text_#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by CSS ID' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(css: "#text_#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by class' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(class: "text-#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by CSS class' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(css: ".text-#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by Text' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(text: "Text #{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by attribute only' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(css: "[data-text-#{i}]").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by attribute value' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(css: "[data-text='text#{i}']").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by Name' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(name: "text#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by XPath' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(xpath: "//a[@data-text='text#{i}']").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+    end
+
+    context "Watirmark with Regex" do
+
+      before(:all) do
+        puts 'Watirmark with Regex'
+      end
+
+      let(:b) { @session.openbrowser }
+
+      before(:each) do
+        @config = Watirmark::Configuration.instance
+        @config.webdriver = 'chrome'
+        @session = Watirmark::Session.instance
+        b.goto TEST_ELEMENTS_URL
+      end
+
+      after(:each) do
+        @session.closebrowser
+        @config.reload
+      end
+
+      it 'finds element by ID' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(id: /xt_#{i}/).text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by class' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(class: /xt-#{i}/).text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by Text' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(text: /xt #{i}/).text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by Name' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(name: /xt#{i}/).text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+    end
+
+    context "Watirmark with generic element" do
+
+      before(:all) do
+        puts 'Watirmark with generic element'
+      end
+
+      let(:b) { @session.openbrowser }
+
+      before(:each) do
+        @config = Watirmark::Configuration.instance
+        @config.webdriver = 'chrome'
+
+        @session = Watirmark::Session.instance
+        b.goto TEST_ELEMENTS_URL
+      end
+
+      after(:each) do
+        @session.closebrowser
+        @config.reload
+      end
+
+      it 'finds element by ID' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.element(id: "text_#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by CSS ID' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.element(css: "#text_#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by class' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.element(class: "text-#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by CSS class' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.element(css: ".text-#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by Text' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.element(text: "Text #{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by attribute only' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.element(css: "[data-text-#{i}]").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by attribute value' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.element(css: "[data-text='text#{i}']").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by Name' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.element(name: "text#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by XPath' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.element(xpath: "//a[@data-text='text#{i}']").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+    end
+
+    context "Watirmark with CSS" do
+
+      before(:all) do
+        puts 'Watirmark with CSS'
+        Watir.prefer_css = true
+      end
+
+      after(:all) do
+        Watir.prefer_css = false
+      end
+
+      let(:b) { @session.openbrowser }
+
+      before(:each) do
+        @config = Watirmark::Configuration.instance
+        @config.webdriver = 'chrome'
+
+        @session = Watirmark::Session.instance
+        b.goto TEST_ELEMENTS_URL
+      end
+
+      after(:each) do
+        @session.closebrowser
+        @config.reload
+      end
+
+      it 'finds element by class' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(class: "text-#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by Text' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(text: "Text #{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by Name' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.a(name: "text#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+    end
+
+    context "Watirmark without Always Locate" do
+
+      before(:all) do
+        Watir.always_locate = false
+        puts 'Watirmark without Always Locate'
+      end
+
+      after(:all) do
+        Watir.always_locate = true
+      end
+
+      let(:b) { @session.openbrowser }
+
+      before(:each) do
+        @session = Watirmark::Session.instance
+        b.goto TEST_ELEMENTS_URL
+        @config = Watirmark::Configuration.instance
+        @config.webdriver = 'chrome'
+      end
+
+      after(:each) do
+        @session.closebrowser
+      end
+
+      it 'finds element by ID' do
+        15.times do
+          @elements = []
+          (1..15).each do |i|
+            @elements << b.a(id: "text_#{i}")
+          end
+          start_time = Time.now
+          (1..15).each do |i|
+            @elements[i-1].text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by CSS ID' do
+        15.times do
+          @elements = []
+          (1..15).each do |i|
+            @elements << b.a(css: "#text_#{i}")
+          end
+          start_time = Time.now
+          (1..15).each do |i|
+            @elements[i-1].text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by class' do
+        15.times do
+          @elements = []
+          (1..15).each do |i|
+            @elements << b.a(class: "text-#{i}")
+          end
+          start_time = Time.now
+          (1..15).each do |i|
+            @elements[i-1].text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by CSS class' do
+        15.times do
+          @elements = []
+          (1..15).each do |i|
+            @elements << b.a(class: "text-#{i}")
+          end
+          start_time = Time.now
+          (1..15).each do |i|
+            @elements[i-1].text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by Text' do
+        15.times do
+          @elements = []
+          (1..15).each do |i|
+            @elements << b.a(text: "Text #{i}")
+          end
+          start_time = Time.now
+          (1..15).each do |i|
+            @elements[i-1].text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by attribute only' do
+        15.times do
+          @elements = []
+          (1..15).each do |i|
+            @elements << b.a(css: "[data-text-#{i}]")
+          end
+          start_time = Time.now
+          (1..15).each do |i|
+            @elements[i-1].text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by attribute value' do
+        15.times do
+          @elements = []
+          (1..15).each do |i|
+            @elements << b.a(css: "[data-text='text#{i}']")
+          end
+          start_time = Time.now
+          (1..15).each do |i|
+            @elements[i-1].text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by Name' do
+        15.times do
+          @elements = []
+          (1..15).each do |i|
+            @elements << b.a(name: "text#{i}")
+          end
+          start_time = Time.now
+          (1..15).each do |i|
+            @elements[i-1].text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by XPath' do
+        15.times do
+          @elements = []
+          (1..15).each do |i|
+            @elements << b.a(xpath: "//a[@data-text='text#{i}']")
+          end
+          start_time = Time.now
+          (1..15).each do |i|
+            @elements[i-1].text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+    end
+
+    context "Watirmark generic element without Always Locate" do
+
+      before(:all) do
+        Watir.always_locate = false
+        puts 'Watirmark without Always Locate'
+      end
+
+      after(:all) do
+        Watir.always_locate = true
+      end
+
+      let(:b) { @session.openbrowser }
+
+      before(:each) do
+        @session = Watirmark::Session.instance
+        b.goto TEST_ELEMENTS_URL
+        @config = Watirmark::Configuration.instance
+        @config.webdriver = 'chrome'
+      end
+
+      after(:each) do
+        @session.closebrowser
+      end
+
+      it 'finds element by ID' do
+        15.times do
+          @elements = []
+          (1..15).each do |i|
+            @elements << b.element(id: "text_#{i}")
+          end
+          start_time = Time.now
+          (1..15).each do |i|
+            @elements[i-1].text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by CSS ID' do
+        15.times do
+          @elements = []
+          (1..15).each do |i|
+            @elements << b.element(css: "#text_#{i}")
+          end
+          start_time = Time.now
+          (1..15).each do |i|
+            @elements[i-1].text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by class' do
+        15.times do
+          @elements = []
+          (1..15).each do |i|
+            @elements << b.element(class: "text-#{i}")
+          end
+          start_time = Time.now
+          (1..15).each do |i|
+            @elements[i-1].text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by CSS class' do
+        15.times do
+          @elements = []
+          (1..15).each do |i|
+            @elements << b.element(class: "text-#{i}")
+          end
+          start_time = Time.now
+          (1..15).each do |i|
+            @elements[i-1].text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by Text' do
+        15.times do
+          @elements = []
+          (1..15).each do |i|
+            @elements << b.element(text: "Text #{i}")
+          end
+          start_time = Time.now
+          (1..15).each do |i|
+            @elements[i-1].text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by attribute only' do
+        15.times do
+          @elements = []
+          (1..15).each do |i|
+            @elements << b.element(css: "[data-text-#{i}]")
+          end
+          start_time = Time.now
+          (1..15).each do |i|
+            @elements[i-1].text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by attribute value' do
+        15.times do
+          @elements = []
+          (1..15).each do |i|
+            @elements << b.element(css: "[data-text='text#{i}']")
+          end
+          start_time = Time.now
+          (1..15).each do |i|
+            @elements[i-1].text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by Name' do
+        15.times do
+          @elements = []
+          (1..15).each do |i|
+            @elements << b.element(name: "text#{i}")
+          end
+          start_time = Time.now
+          (1..15).each do |i|
+            @elements[i-1].text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by XPath' do
+        15.times do
+          @elements = []
+          (1..15).each do |i|
+            @elements << b.element(xpath: "//a[@data-text='text#{i}']")
+          end
+          start_time = Time.now
+          (1..15).each do |i|
+            @elements[i-1].text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+    end
+
+
+
+    context "Webdriver" do
+      let(:b) { Selenium::WebDriver.for :chrome }
+
+      before(:all) do
+        puts 'Webdriver'
+      end
+
+      before(:each) do
+        b.get TEST_ELEMENTS_URL
+      end
+
+      after(:each) do
+        b.quit
+      end
+
+      it 'finds elements by ID' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.first(id: "text_#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds elements by CSS ID' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.first(css: "#text_#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds elements by class' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.first(class: "text-#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds elements by CSS class' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.first(css: ".text-#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds elements by Text' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.first(link: "Text #{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds elements by attribute only' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.first(css: "[data-text-#{i}]").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds elements by attribute value' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.first(css: "[data-text='text#{i}']").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by Name' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.first(name: "text#{i}").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+      it 'finds element by XPath' do
+        15.times do
+          start_time = Time.now
+          (1..15).each do |i|
+            b.first(xpath: "//a[@data-text='text#{i}']").text.should == "Text #{i}"
+          end
+          @array << Time.now - start_time
+        end
+        puts "#{RSpec.current_example.description} - #{result(@array)}"
+      end
+
+    end
   end
-
-  context "Watirmark" do
-
-    before(:all) do
-      puts 'Watirmark'
-    end
-
-    let(:b) { @session.openbrowser }
-
-    before(:each) do
-      @session = Watirmark::Session.instance
-      b.goto TEST_ELEMENTS_URL
-    end
-
-    after(:each) do
-      @session.closebrowser
-    end
-
-    it 'finds element by ID' do
-      15.times do
-        start_time = Time.now
-        (1..15).each do |i|
-          b.a(id: "text_#{i}").text.should == "Text #{i}"
-        end
-        @array << Time.now - start_time
-      end
-      puts "#{RSpec.current_example.description} - #{result(@array)}"
-    end
-
-    it 'finds element by CSS ID' do
-      15.times do
-        start_time = Time.now
-        (1..15).each do |i|
-          b.a(css: "#text_#{i}").text.should == "Text #{i}"
-        end
-        @array << Time.now - start_time
-      end
-      puts "#{RSpec.current_example.description} - #{result(@array)}"
-    end
-
-    it 'finds element by class' do
-      15.times do
-        start_time = Time.now
-        (1..15).each do |i|
-          b.a(class: "text-#{i}").text.should == "Text #{i}"
-        end
-        @array << Time.now - start_time
-      end
-      puts "#{RSpec.current_example.description} - #{result(@array)}"
-    end
-
-    it 'finds element by CSS class' do
-      15.times do
-        start_time = Time.now
-        (1..15).each do |i|
-          b.a(css: ".text-#{i}").text.should == "Text #{i}"
-        end
-        @array << Time.now - start_time
-      end
-      puts "#{RSpec.current_example.description} - #{result(@array)}"
-    end
-
-    it 'finds element by Text' do
-      15.times do
-        start_time = Time.now
-        (1..15).each do |i|
-          b.a(text: "Text #{i}").text.should == "Text #{i}"
-        end
-        @array << Time.now - start_time
-      end
-      puts "#{RSpec.current_example.description} - #{result(@array)}"
-    end
-
-    it 'finds element by attribute only' do
-      15.times do
-        start_time = Time.now
-        (1..15).each do |i|
-          b.a(css: "[data-text-#{i}]").text.should == "Text #{i}"
-        end
-        @array << Time.now - start_time
-      end
-      puts "#{RSpec.current_example.description} - #{result(@array)}"
-    end
-
-    it 'finds element by attribute value' do
-      15.times do
-        start_time = Time.now
-        (1..15).each do |i|
-          b.a(css: "[data-text='text#{i}']").text.should == "Text #{i}"
-        end
-        @array << Time.now - start_time
-      end
-      puts "#{RSpec.current_example.description} - #{result(@array)}"
-    end
-
-    it 'finds element by Name' do
-      15.times do
-        start_time = Time.now
-        (1..15).each do |i|
-          b.a(name: "text#{i}").text.should == "Text #{i}"
-        end
-        @array << Time.now - start_time
-      end
-      puts "#{RSpec.current_example.description} - #{result(@array)}"
-    end
-
-    it 'finds element by XPath' do
-      15.times do
-        start_time = Time.now
-        (1..15).each do |i|
-          b.a(xpath: "//a[@data-text='text#{i}']").text.should == "Text #{i}"
-        end
-        @array << Time.now - start_time
-      end
-      puts "#{RSpec.current_example.description} - #{result(@array)}"
-    end
-
-  end
-
-  context "Watirmark with CSS" do
-
-    before(:all) do
-      puts 'Watirmark with CSS'
-      Watir.prefer_css = true
-    end
-
-    after(:all) do
-      Watir.prefer_css = false
-    end
-
-    let(:b) { @session.openbrowser }
-
-    before(:each) do
-      @session = Watirmark::Session.instance
-      b.goto TEST_ELEMENTS_URL
-    end
-
-    after(:each) do
-      @session.closebrowser
-    end
-
-    it 'finds element by class' do
-      15.times do
-        start_time = Time.now
-        (1..15).each do |i|
-          b.a(class: "text-#{i}").text.should == "Text #{i}"
-        end
-        @array << Time.now - start_time
-      end
-      puts "#{RSpec.current_example.description} - #{result(@array)}"
-    end
-
-    it 'finds element by Text' do
-      15.times do
-        start_time = Time.now
-        (1..15).each do |i|
-          b.a(text: "Text #{i}").text.should == "Text #{i}"
-        end
-        @array << Time.now - start_time
-      end
-      puts "#{RSpec.current_example.description} - #{result(@array)}"
-    end
-
-    it 'finds element by Name' do
-      15.times do
-        start_time = Time.now
-        (1..15).each do |i|
-          b.a(name: "text#{i}").text.should == "Text #{i}"
-        end
-        @array << Time.now - start_time
-      end
-      puts "#{RSpec.current_example.description} - #{result(@array)}"
-    end
-  end
-
-  context "Webdriver" do
-    let(:b) { Selenium::WebDriver.for :firefox }
-
-    before(:all) do
-      puts 'Webdriver'
-    end
-
-    before(:each) do
-      b.get TEST_ELEMENTS_URL
-    end
-
-    after(:each) do
-      b.quit
-    end
-
-    it 'finds elements by ID' do
-      15.times do
-        start_time = Time.now
-        (1..15).each do |i|
-          b.first(id: "text_#{i}").text.should == "Text #{i}"
-        end
-        @array << Time.now - start_time
-      end
-      puts "#{RSpec.current_example.description} - #{result(@array)}"
-    end
-
-    it 'finds elements by CSS ID' do
-      15.times do
-        start_time = Time.now
-        (1..15).each do |i|
-          b.first(css: "#text_#{i}").text.should == "Text #{i}"
-        end
-        @array << Time.now - start_time
-      end
-      puts "#{RSpec.current_example.description} - #{result(@array)}"
-    end
-
-    it 'finds elements by class' do
-      15.times do
-        start_time = Time.now
-        (1..15).each do |i|
-          b.first(class: "text-#{i}").text.should == "Text #{i}"
-        end
-        @array << Time.now - start_time
-      end
-      puts "#{RSpec.current_example.description} - #{result(@array)}"
-    end
-
-    it 'finds elements by CSS class' do
-      15.times do
-        start_time = Time.now
-        (1..15).each do |i|
-          b.first(css: ".text-#{i}").text.should == "Text #{i}"
-        end
-        @array << Time.now - start_time
-      end
-      puts "#{RSpec.current_example.description} - #{result(@array)}"
-    end
-
-    it 'finds elements by Text' do
-      15.times do
-        start_time = Time.now
-        (1..15).each do |i|
-          b.first(link: "Text #{i}").text.should == "Text #{i}"
-        end
-        @array << Time.now - start_time
-      end
-      puts "#{RSpec.current_example.description} - #{result(@array)}"
-    end
-
-    it 'finds elements by attribute only' do
-      15.times do
-        start_time = Time.now
-        (1..15).each do |i|
-          b.first(css: "[data-text-#{i}]").text.should == "Text #{i}"
-        end
-        @array << Time.now - start_time
-      end
-      puts "#{RSpec.current_example.description} - #{result(@array)}"
-    end
-
-    it 'finds elements by attribute value' do
-      15.times do
-        start_time = Time.now
-        (1..15).each do |i|
-          b.first(css: "[data-text='text#{i}']").text.should == "Text #{i}"
-        end
-        @array << Time.now - start_time
-      end
-      puts "#{RSpec.current_example.description} - #{result(@array)}"
-    end
-
-    it 'finds element by Name' do
-      15.times do
-        start_time = Time.now
-        (1..15).each do |i|
-          b.first(name: "text#{i}").text.should == "Text #{i}"
-        end
-        @array << Time.now - start_time
-      end
-      puts "#{RSpec.current_example.description} - #{result(@array)}"
-    end
-
-    it 'finds element by XPath' do
-      15.times do
-        start_time = Time.now
-        (1..15).each do |i|
-          b.first(xpath: "//a[@data-text='text#{i}']").text.should == "Text #{i}"
-        end
-        @array << Time.now - start_time
-      end
-      puts "#{RSpec.current_example.description} - #{result(@array)}"
-    end
-
-  end
-
 end
 
 def result(array)
